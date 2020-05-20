@@ -2,6 +2,24 @@
   #FONTS
 \*------------------------------------*/
 
+@font-face {
+    font-family: "Nunito";
+    font-weight: 400;
+    src: url("../fonts/nunito-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-weight: 600;
+    src: url("../fonts/nunito-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Nunito";
+    font-weight: 700;
+    src: url("../fonts/nunito-700.woff2") format("woff2");
+}
+
 /*------------------------------------*\
   #GENERIC
 \*------------------------------------*/
@@ -13,10 +31,10 @@
 */
 
 html {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.5;
-    font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
-    color: #111;
+    font-family: "Nunito", Helvetica, arial, sans-serif;
+    color: #0F2027;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     box-sizing: border-box;
@@ -212,7 +230,7 @@ a:focus {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    max-width: 90em; /* 90 * 16px = 1440px */
+    max-width: 62em; /* 62 * 18px = 1116px */
 }
 
 /*
@@ -411,10 +429,186 @@ a:focus {
 \*------------------------------------*/
 
 /*
-    Component: Component name
+    Component: Logo
     ---
-    Component description
+    Website main logo
 */
+
+.c-logo {
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.c-logo__symbol {
+    height: 100%;
+}
+
+.c-logo__symbol g {
+    stroke: #fff;
+}
+
+.c-logo__text {
+    font-size: 24px;
+    margin-left: 16px;
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+    .c-logo {
+        height: 40px;
+    }
+
+    .c-logo__text {
+        font-size: 32px;
+    }
+}
+
+/*
+    Component: header
+    ---
+    Main header of the website
+*/
+
+.o-row:first-child {
+    background-image: linear-gradient(to right bottom, #0F2027, #2C5364);
+}
+
+.c-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.c-header__nav {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .c-header__nav {
+        display: block;
+    }
+
+    .c-header__mobile-nav-trigger {
+        display: none;
+    }
+}
+
+/*
+    Component: Nav
+    ---
+    Main navigation of the site
+*/
+
+.c-nav-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    width: 32px;
+    height: 32px;
+}
+
+.c-nav-trigger__svg {
+    fill: #fff;
+    height: 100%;
+}
+
+.c-nav {
+    font-size: 22px;
+    line-height: 33px;
+}
+
+.c-nav__link {
+    text-decoration: none;
+    font-weight: 400;
+    display: block;
+    padding: 8px 0;
+}
+
+.c-nav__link,
+.c-nav__link:visited,
+.c-nav__link:active {
+    color: #fff;
+    opacity: 0.75;
+}
+
+.is-selected .c-nav__link,
+.c-nav__link:hover,
+.c-nav__link:focus {
+    color: #fff;
+    opacity: 1;
+}
+
+@media (min-width: 768px) {
+    .c-nav__list {
+        display: flex;
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+
+    .c-nav__link {
+        padding: 8px 16px;
+    }
+}
+
+/*
+    Component: mobile nav
+    ---
+    Dedicated mobile nav component
+*/
+
+.c-mobile-nav__body-trigger {
+    position: absolute;
+    right: 16px;
+}
+
+.c-mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    pointer-events: none;
+}
+
+.has-mobile-nav .c-mobile-nav {
+    pointer-events: auto;
+}
+
+.c-mobile-nav__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0F2027;
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+
+.has-mobile-nav .c-mobile-nav__bg {
+    opacity: 0.9;
+}
+
+.c-mobile-nav__body {
+    position: absolute;
+    padding: 24px;
+    height: 100vh;
+    width: 64vw;
+    right: 0;
+    background-image: linear-gradient(to right bottom, #0F2027, #2C5364);
+    transform: translateX(200%);
+    transition: transform .25s ease;
+}
+
+.c-mobile-nav__body .c-nav__item:first-child .c-nav__link {
+    padding-top: 0;
+}
+
+.has-mobile-nav .c-mobile-nav__body {
+    transform: translateX(0);
+}
 
 /*------------------------------------*\
   #UTILITIES
