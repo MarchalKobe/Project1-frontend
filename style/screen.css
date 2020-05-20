@@ -55,7 +55,7 @@ html {
 
 
 ::selection {
-    background: #e85e00;
+    background: #4F95B3;
     color: white;
     text-shadow: none;
 }
@@ -451,6 +451,7 @@ a:focus {
 .c-logo__text {
     font-size: 24px;
     margin-left: 16px;
+    letter-spacing: 2px;
     color: #fff;
 }
 
@@ -608,6 +609,24 @@ a:focus {
 
 .has-mobile-nav .c-mobile-nav__body {
     transform: translateX(0);
+}
+
+/*
+    Component: footer
+    ---
+    Main footer of the website
+*/
+
+.c-footer {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+    text-align: center;
+}
+
+.c-footer p {
+    margin: 0;
+    font-size: 16px;
 }
 
 /*------------------------------------*\
