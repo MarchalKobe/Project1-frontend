@@ -612,6 +612,38 @@ a:focus {
 }
 
 /*
+    Component: Lead
+    ---
+    Lead type treatments to style everything that differs from standard typography elements
+*/
+
+.c-lead {
+    position: relative;
+}
+
+.c-lead--md {
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.c-lead--lg {
+    font-size: 24px;
+    line-height: 36px;
+}
+
+/* .c-lead--xl {
+    font-size: 32px;
+    line-height: 40px;
+} */
+
+@media (min-width: 768px) {
+    .c-lead--lg {
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+
+/*
     Component: footer
     ---
     Main footer of the website
@@ -619,7 +651,7 @@ a:focus {
 
 .c-footer {
     position: absolute;
-    bottom: 24px;
+    top: 80vh;
     width: 100%;
     text-align: center;
 }
@@ -632,6 +664,24 @@ a:focus {
 /*------------------------------------*\
   #UTILITIES
 \*------------------------------------*/
+
+/*
+    Utilities: color
+    ---
+    Utility classes to put specific colors onto elements
+*/
+
+.u-color-neutral-light {
+    color: #386A80;
+}
+
+/* .u-color-neutral-base {
+    color: #9C9EB8;
+}
+
+.u-color-neutral-dark {
+    color: #83859E;
+} */
 
 /*
     Utilities: spacing
@@ -674,7 +724,7 @@ a:focus {
 */
 
 .u-max-width-sm {
-    max-width: 36em !important;
+    max-width: 14em !important;
 }
 
 .u-max-width-md {
