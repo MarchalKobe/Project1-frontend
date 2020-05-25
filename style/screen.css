@@ -651,7 +651,7 @@ a:focus {
 
 .c-footer {
     position: absolute;
-    top: 80vh;
+    top: 95%;
     width: 100%;
     text-align: center;
 }
