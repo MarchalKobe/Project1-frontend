@@ -8,6 +8,32 @@
 //#endregion
 
 //#region ***  Data Access - get___ ***
+const getDay = function(day) {
+    const days = ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"];
+    return days[day - 1];
+};
+
+const getMonth = function(month) {
+    const months = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
+    return months[month];
+};
+
+const getDate = function() {
+    const today = new Date();
+    const year = String(today.getFullYear());
+    let month = String(today.getMonth() + 1);
+    let day = String(today.getDate());
+
+    if(month.length == 1) {
+        month = `0${month}`;
+    }
+
+    if(day.length == 1) {
+        day = `0${day}`;
+    }
+
+    return `${year}-${month}-${day}`;
+};
 //#endregion
 
 //#region ***  Event Listeners - listenTo___ ***
@@ -31,6 +57,18 @@ const init = function() {
         showTime();
         showDate();
         getCity();
+    };
+
+    if(document.querySelector(".js-temperatuur")) {
+        const date = getDate();
+        getValuesTemperatuur(date);
+        listenToChartDateChange();
+    };
+
+    if(document.querySelector(".js-luchtkwaliteit")) {
+        const date = getDate();
+        getValuesLuchtkwaliteit(date);
+        listenToChartDateChange();
     };
 };
 

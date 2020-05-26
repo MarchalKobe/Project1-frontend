@@ -50,16 +50,6 @@ const getTime = function(time) {
     }
 };
 
-const getDay = function(day) {
-    const days = ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"];
-    return days[day - 1];
-};
-
-const getMonth = function(month) {
-    const months = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
-    return months[month];
-};
-
 const getCity = function() {
     handleData("https://ipinfo.io/json?token=03726150ef306e", getTemp);
 };

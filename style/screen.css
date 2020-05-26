@@ -186,6 +186,11 @@ a:focus {
 
 /* size modifiers */
 
+.o-row--sm {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
 .o-row--lg {
     padding-top: 48px;
     padding-bottom: 24px;
@@ -194,6 +199,13 @@ a:focus {
 .o-row--xl {
     padding-top: 72px;
     padding-bottom: 48px;
+}
+
+@media (min-width: 425px) {
+    .o-row--sm {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -455,6 +467,12 @@ a:focus {
     color: #fff;
 }
 
+.c-logo__text a,
+.c-logo__text a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
 @media (min-width: 768px) {
     .c-logo {
         height: 40px;
@@ -534,7 +552,7 @@ a:focus {
     opacity: 0.75;
 }
 
-.is-selected .c-nav__link,
+.c-nav .is-selected .c-nav__link,
 .c-nav__link:hover,
 .c-nav__link:focus {
     color: #fff;
@@ -641,6 +659,39 @@ a:focus {
         font-size: 30px;
         line-height: 40px;
     }
+}
+
+/*
+    Component: PageNav
+    ---
+    Page navigation of the site
+*/
+
+.c-page-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.c-page-nav__link {
+    margin-left: 32px;
+}
+
+.c-page-nav .first {
+    margin-left: 0;
+}
+
+.c-page-nav__link,
+.c-page-nav__link:visited,
+.c-page-nav__link:active {
+    text-decoration: none;
+    color: #666F73;
+}
+
+.c-page-nav .is-selected .c-page-nav__link,
+.c-page-nav__link:hover,
+.c-page-nav__link:focus {
+    color: #222526;
 }
 
 /*

@@ -14,8 +14,4 @@
 //#endregion
 
 //#region ***  INIT / DOMContentLoaded  ***
-const init = function() {
-};
-
-document.addEventListener("DOMContentLoaded", init);
 //#endregion
