@@ -1,7 +1,17 @@
 //#region ***  DOM references ***
+let html_logoutButton;
 //#endregion
 
 //#region ***  Callback-Visualisation - show___ ***
+const showLogoutButton = function() {
+    html_logoutButton = document.querySelectorAll(".js-login-header");
+
+    for(const knop of html_logoutButton) {
+        knop.innerHTML = "Afmelden";
+    }
+
+    listenToLogoutButtons();
+};
 //#endregion
 
 //#region ***  Callback-No Visualisation - callback___  ***
@@ -37,6 +47,13 @@ const getDate = function() {
 //#endregion
 
 //#region ***  Event Listeners - listenTo___ ***
+const listenToLogoutButtons = function() {
+    for(const knop of html_logoutButton) {
+        knop.addEventListener("click", function() {
+            sessionStorage.removeItem("token");
+        });
+    }
+};
 //#endregion
 
 //#region ***  INIT / DOMContentLoaded  ***
@@ -71,6 +88,12 @@ const init = function() {
 
     if(document.querySelector(".js-login")) {
         listenToSubmitButton();
+    };
+
+    const token = sessionStorage.getItem("token");
+
+    if(token) {
+        showLogoutButton();
     };
 };
 
