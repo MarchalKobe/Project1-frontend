@@ -70,6 +70,10 @@ const init = function() {
         getValuesLuchtkwaliteit(date);
         listenToChartDateChange();
     };
+
+    if(document.querySelector(".js-login")) {
+        listenToSubmitButton();
+    };
 };
 
 document.addEventListener("DOMContentLoaded", init);
