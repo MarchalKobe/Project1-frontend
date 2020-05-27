@@ -695,6 +695,92 @@ a:focus {
 }
 
 /*
+    Component: Login
+    ---
+    Login section of the website
+*/
+
+.c-login {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.c-login__title {
+    font-size: 32px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.c-login input {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 4px;
+}
+
+.c-login button {
+    position: absolute;
+    right: 0;
+}
+
+@media(min-width: 425px) {
+    .c-login,
+    .c-login input {
+        width: 300px;
+    }
+}
+
+/*
+    Component: Login Fault
+    ---
+    Login fault section of the website
+*/
+
+.c-login-fault {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.c-login-fault__title {
+    font-size: 24px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+.c-login-fault__text {
+    font-size: 18px;
+}
+
+.c-login-fault a {
+    text-decoration: none;
+    color: #222526;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+}
+
+@media(min-width: 600px) {
+    .c-login-fault {
+        width: 575px;
+    }
+}
+
+@media(min-width: 768px) {
+    .c-login-fault__title {
+        font-size: 32px;
+    }
+    
+    .c-login-fault__text {
+        font-size: 24px;
+    }
+
+    .c-login-fault a {
+        font-size: 22px;
+    }
+}
+
+/*
     Component: footer
     ---
     Main footer of the website

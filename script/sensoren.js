@@ -1,6 +1,6 @@
 //#region ***  DOM references ***
 let chartDate, chartLabel, chartBackgroundColor, chartBorderColor, chartTickSymbol;
-let html_chartDate, html_chartPrev, html_chartNext;
+let html_chartDate, html_chartPrev, html_chartNext, html_sensor;
 //#endregion
 
 //#region ***  Callback-Visualisation - show___ ***
@@ -48,6 +48,18 @@ const showChart = function(jsonObject) {
         }
     });
 };
+
+const showNotLoggedIn = function() {
+    html_sensor = document.querySelector(".js-sensor");
+
+    html_sensor.innerHTML = `
+        <div class="c-login-fault">
+            <h2 class="c-login-fault__title">Je moet aangemeld zijn!</h2>
+            <p class="c-login-fault__text">Om deze pagina te bezoeken moet je aangemeld zijn.</p>
+            <a href="/aanmelden.html">Aanmelden</a>
+        </div>
+    `;
+};
 //#endregion
 
 //#region ***  Callback-No Visualisation - callback___  ***
@@ -62,7 +74,13 @@ const getValuesTemperatuur = function(date) {
     chartTickSymbol = "°";
 
     const token = sessionStorage.getItem("token");
-    handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
+
+    if(token) {
+        handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
+        listenToChartDateChange();
+    } else {
+        showNotLoggedIn();
+    };
 };
 
 const getValuesLuchtkwaliteit = function(date) {
@@ -73,7 +91,13 @@ const getValuesLuchtkwaliteit = function(date) {
     chartTickSymbol = "";
 
     const token = sessionStorage.getItem("token");
-    handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
+
+    if(token) {
+        handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
+        listenToChartDateChange();
+    } else {
+        showNotLoggedIn();
+    };
 };
 //#endregion
 

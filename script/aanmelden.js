@@ -1,14 +1,11 @@
 //#region ***  DOM references ***
-let html_username, html_password, html_submit, html_login;
+let html_username, html_password, html_submit, html_login, html_loggedIn;
 //#endregion
 
 //#region ***  Callback-Visualisation - show___ ***
 const showAangemeld = function(jsonObject) {
-    html_login = document.querySelector(".js-login");
-
-    html_login.innerHTML = "Aangemeld<br />";
-    html_login.innerHTML += jsonObject.access_token;
     sessionStorage.setItem("token", jsonObject.access_token);
+    document.location.href = "/";
 };
 
 const showError = function(jsonObject) {
@@ -29,6 +26,13 @@ const listenToSubmitButton = function() {
     html_username = document.querySelector(".js-username");
     html_password = document.querySelector(".js-password");
     html_submit = document.querySelector(".js-submit");
+    html_login = document.querySelector(".js-login");
+    html_loggedIn = document.querySelector(".js-loggedIn");
+
+    if(sessionStorage.getItem("token")) {
+        html_login.innerHTML = "";
+        html_loggedIn.innerHTML = "<p>Je bent al aangemeld</p>";
+    };
 
     html_submit.addEventListener("click", function() {
         const username = html_username.value;

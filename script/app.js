@@ -62,13 +62,11 @@ const init = function() {
     if(document.querySelector(".js-temperatuur")) {
         const date = getDate();
         getValuesTemperatuur(date);
-        listenToChartDateChange();
     };
 
     if(document.querySelector(".js-luchtkwaliteit")) {
         const date = getDate();
         getValuesLuchtkwaliteit(date);
-        listenToChartDateChange();
     };
 
     if(document.querySelector(".js-login")) {
