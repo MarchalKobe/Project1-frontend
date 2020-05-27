@@ -60,7 +60,9 @@ const getValuesTemperatuur = function(date) {
     chartBackgroundColor = "rgba(255, 255, 0, 0.2)";
     chartBorderColor = "rgba(255, 255, 0, 1)";
     chartTickSymbol = "°";
-    handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart);
+
+    const token = sessionStorage.getItem("token");
+    handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
 };
 
 const getValuesLuchtkwaliteit = function(date) {
@@ -69,7 +71,9 @@ const getValuesLuchtkwaliteit = function(date) {
     chartBackgroundColor = "rgba(54, 162, 235, 0.2)";
     chartBorderColor = "rgba(54, 162, 235, 1)";
     chartTickSymbol = "";
-    handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart);
+
+    const token = sessionStorage.getItem("token");
+    handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
 };
 //#endregion
 

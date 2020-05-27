@@ -6,7 +6,9 @@ let html_username, html_password, html_submit, html_login;
 const showAangemeld = function(jsonObject) {
     html_login = document.querySelector(".js-login");
 
-    html_login.innerHTML = "Aangemeld";
+    html_login.innerHTML = "Aangemeld<br />";
+    html_login.innerHTML += jsonObject.access_token;
+    sessionStorage.setItem("token", jsonObject.access_token);
 };
 
 const showError = function(jsonObject) {
