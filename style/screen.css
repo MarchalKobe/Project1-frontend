@@ -781,6 +781,32 @@ a:focus {
 }
 
 /*
+    Component: Chart
+    ---
+    Chart of the website
+*/
+
+.c-chart {
+    margin-bottom: 16px;
+}
+
+.c-chart__legend p {
+    margin-bottom: 0;
+}
+
+.c-chart__legend .green {
+    color: rgb(45, 136, 36);
+}
+
+.c-chart__legend .yellow {
+    color: rgb(247, 191, 2);
+}
+
+.c-chart__legend .red {
+    color: rgb(210, 33, 45);
+}
+
+/*
     Component: footer
     ---
     Main footer of the website

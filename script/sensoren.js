@@ -1,6 +1,6 @@
 //#region ***  DOM references ***
-let chartDate, chartLabel, chartBackgroundColor, chartBorderColor, chartTickSymbol;
-let html_chartDate, html_chartPrev, html_chartNext, html_sensor;
+let chartDate, chartLabel, chartBackgroundColor, chartBorderColor, chartTickSymbol, chartType;
+let html_chart, html_chartDate, html_chartPrev, html_chartNext, html_sensor;
 //#endregion
 
 //#region ***  Callback-Visualisation - show___ ***
@@ -11,6 +11,16 @@ const showChart = function(jsonObject) {
     let labels = [];
     let data = [];
 
+    if(chartLabel == "Temperatuur") {
+        chartType = "line";
+        chartBackgroundColor = "rgba(244, 137, 20, 0.3)";
+        chartBorderColor = "rgba(244, 137, 20, 1)";
+    } else {
+        chartType = "bar";
+        chartBackgroundColor = [];
+        chartBorderColor = [];
+    };
+
     for(let waarde of jsonObject.sensor_waarden) {
 
         let fullDate = waarde.Datum;
@@ -18,27 +28,40 @@ const showChart = function(jsonObject) {
 
         labels.push(time);
         data.push(waarde.Waarde);
+
+        if(chartLabel == "Luchtkwaliteit") {
+            if(waarde.Waarde > 700) {
+                chartBackgroundColor.push("rgba(210, 33, 45, 0.3)");
+                chartBorderColor.push("rgba(210, 33, 45, 0.6)");
+            } else if (waarde.Waarde > 300) {
+                chartBackgroundColor.push("rgba(247, 191, 2, 0.3)");
+                chartBorderColor.push("rgba(247, 191, 2, 1)");
+            } else {
+                chartBackgroundColor.push("rgba(45, 136, 36, 0.3)");
+                chartBorderColor.push("rgba(45, 136, 36, 0.6)");
+            };
+        };
     }
 
     const ctx = document.querySelector(".js-chart").getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'bar',
+        type: chartType,
         data: {
             labels: labels,
             datasets: [{
+                fill: false,
                 label: chartLabel,
                 data: data,
                 backgroundColor: chartBackgroundColor,
                 borderColor: chartBorderColor,
-                borderWidth: 1
+                borderWidth: 2
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 yAxes: [{
                     ticks: {
-                        responsive: true,
-                        beginAtZero: true,
                         callback: function(value, index, values) {
                             return value + chartTickSymbol;
                         }
@@ -69,8 +92,6 @@ const showNotLoggedIn = function() {
 const getValuesTemperatuur = function(date) {
     chartDate = date;
     chartLabel = "Temperatuur";
-    chartBackgroundColor = "rgba(255, 255, 0, 0.2)";
-    chartBorderColor = "rgba(255, 255, 0, 1)";
     chartTickSymbol = "°";
 
     const token = sessionStorage.getItem("token");
@@ -78,6 +99,7 @@ const getValuesTemperatuur = function(date) {
     if(token) {
         handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
         listenToChartDateChange();
+        listenToChartResizeScreen();
     } else {
         showNotLoggedIn();
     };
@@ -86,8 +108,6 @@ const getValuesTemperatuur = function(date) {
 const getValuesLuchtkwaliteit = function(date) {
     chartDate = date;
     chartLabel = "Luchtkwaliteit";
-    chartBackgroundColor = "rgba(54, 162, 235, 0.2)";
-    chartBorderColor = "rgba(54, 162, 235, 1)";
     chartTickSymbol = "";
 
     const token = sessionStorage.getItem("token");
@@ -95,6 +115,7 @@ const getValuesLuchtkwaliteit = function(date) {
     if(token) {
         handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
         listenToChartDateChange();
+        listenToChartResizeScreen();
     } else {
         showNotLoggedIn();
     };
@@ -112,6 +133,17 @@ const listenToChartDateChange = function() {
             getValuesTemperatuur(newDate);
         } else {
             getValuesLuchtkwaliteit(newDate);
+        };
+    });
+};
+
+const listenToChartResizeScreen = function() {
+    html_chart = document.querySelector(".js-chart");
+
+    window.addEventListener("resize", function() {
+        if(window.innerWidth <= 768) {
+            html_chart.height = 800;
+            console.log("test");
         };
     });
 };
