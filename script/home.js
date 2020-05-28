@@ -34,6 +34,20 @@ const showTemp = function(jsonObject) {
 
     html_temp.innerHTML = `${desc} ${temp}°C`;
 };
+
+const showInformation = function() {
+    if(sessionStorage.getItem("token")) {
+        html_information = document.querySelector(".js-information");
+
+        html_information.innerHTML = `
+            <p class="c-lead c-lead--lg u-mb-sm">Informatie</p>
+            <p class="c-lead c-lead--md">
+                Raspberry Pi ip: ${location.host}<br />
+                Project @ MCT
+            </p>
+        `
+    };
+};
 //#endregion
 
 //#region ***  Callback-No Visualisation - callback___  ***

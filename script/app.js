@@ -74,6 +74,7 @@ const init = function() {
         showTime();
         showDate();
         getCity();
+        showInformation();
     };
 
     if(document.querySelector(".js-temperatuur")) {

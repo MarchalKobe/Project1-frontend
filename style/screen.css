@@ -712,13 +712,19 @@ a:focus {
     font-weight: 400;
 }
 
+.c-login__fault {
+    color: #ED4337;
+    font-weight: 600;
+    margin: 0;
+}
+
 .c-login input {
     width: 100%;
     margin-bottom: 8px;
     padding: 4px;
 }
 
-.c-login button {
+.c-login a {
     position: absolute;
     right: 0;
 }
@@ -753,9 +759,6 @@ a:focus {
 }
 
 .c-login-fault a {
-    text-decoration: none;
-    color: #222526;
-    font-size: 20px;
     position: absolute;
     right: 0;
 }
@@ -822,6 +825,32 @@ a:focus {
 .c-footer p {
     margin: 0;
     font-size: 16px;
+}
+
+/*
+    Component: CTA link
+    ---
+    Small Call To Action button
+*/
+
+.c-cta {
+    text-decoration: none;
+    color: #222526;
+    font-size: 20px;
+    transition: all .1s ease-in-out;
+    background-color: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.c-cta:visited {
+    color: #222526;
+}
+
+.c-cta:hover,
+.c-cta:focus {
+    color: #222526;
+    opacity: 0.7;
 }
 
 /*------------------------------------*\

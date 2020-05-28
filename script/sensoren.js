@@ -79,7 +79,7 @@ const showNotLoggedIn = function() {
         <div class="c-login-fault">
             <h2 class="c-login-fault__title">Je moet aangemeld zijn!</h2>
             <p class="c-login-fault__text">Om deze pagina te bezoeken moet je aangemeld zijn.</p>
-            <a href="/aanmelden.html">Aanmelden</a>
+            <a class="c-cta" href="/aanmelden.html">Aanmelden</a>
         </div>
     `;
 };
