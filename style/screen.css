@@ -810,6 +810,175 @@ a:focus {
 }
 
 /*
+    Component: calendar
+    ---
+    Calendar of the website
+*/
+
+.c-calendar {
+    box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.16);
+    padding: 8px 0 8px;
+}
+
+.c-calendar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: -14px;
+}
+
+.c-calendar__header button {
+    background: none;
+    border: none;
+    padding: 8px;
+    font-size: 18px;
+    color: #0F2027;
+    outline: none;
+    cursor: pointer;
+}
+
+.c-calendar__header--label {
+    font-size: 22px;
+    font-weight: 200;
+    letter-spacing: 1px;
+}
+
+.c-calendar__header--prev {
+    margin-left: 22px;
+}
+
+.c-calendar__header--next {
+    margin-right: 22px;
+    transform: rotate(180deg);
+}
+
+.c-calendar__days--row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.c-calendar__days--row:last-child {
+    margin-bottom: 8px;
+}
+
+.c-calendar__days--row-hidden {
+    display: none;
+}
+
+.c-calendar__days--item {
+    /* border: 1px solid black; */
+    padding: 1em;
+    width: 14.28%;
+    text-align: center;
+    align-self: stretch;
+    text-transform: uppercase;
+    font-size: 14px;
+    /* For event */
+    line-height: 25px;
+}
+
+.c-calendar__days--item-now {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.c-calendar__days--item-event {
+    color: white;
+    background: #0F2027;
+    display: block;
+    width: inherit;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.c-calendar__days--item-event-selected {
+    opacity: 0.7;
+    font-weight: 600;
+}
+
+.c-calendar__days--item-weekend {
+    background-color: rgba(193, 209, 217, 0.5);
+}
+
+@media (min-width: 425px) {
+    .c-calendar__header {
+        margin-bottom: 0;
+    }
+
+    .c-calendar__header button {
+        font-size: 24px;
+    }
+
+    .c-calendar__header--label {
+        font-size: 28px;
+    }
+
+    .c-calendar__header--prev {
+        margin-left: 24px;
+    }
+
+    .c-calendar__header--next {
+        margin-right: 24px;
+    }
+
+    .c-calendar {
+        padding: 16px 0 16px;
+    }
+
+    .c-calendar__days--item {
+        font-size: 1em;
+        line-height: 40px;
+    }
+
+    .c-calendar__days--item-event {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+.c-event {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.c-event__date {
+    background: #203A43;
+    display: flex;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 15px 10px;
+}
+
+.c-event__date h2 {
+    margin: 0;
+}
+
+.c-event__date h3 {
+    margin: 0;
+}
+
+.c-event__info {
+    margin-left: 18px;
+}
+
+.c-event__info h3 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.c-event__info p {
+    margin: 0;
+}
+
+/*
     Component: footer
     ---
     Main footer of the website

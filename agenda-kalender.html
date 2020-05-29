@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EasyTalk - Sensoren - Temperatuur</title>
+    <title>EasyTalk</title>
     <meta name="description" content="DESCRIPTION">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="msapplication-TileColor" content="#2c5364">
@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="style/normalize.css">
     <link rel="stylesheet" href="style/screen.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="script/dataHandler.js"></script>
-    <script src="script/sensoren.js"></script>
+    <script src="script/kalender.js"></script>
     <script src="script/app.js"></script>
 </head>
 <body>
@@ -46,7 +45,7 @@
                         <nav class="c-nav">
                             <ul class="o-list c-nav__list">
                                 <li class="c-nav__item"><a href="/agenda-kalender.html" class="c-nav__link">Agenda</a></li>
-                                <li class="c-nav__item is-selected"><a href="/sensoren-temperatuur.html" class="c-nav__link">Sensoren</a></li>
+                                <li class="c-nav__item"><a href="/sensoren-temperatuur.html" class="c-nav__link">Sensoren</a></li>
                                 <li class="c-nav__item"><a href="/berichten.html" class="c-nav__link">Berichten</a></li>
                                 <li class="c-nav__item"><a href="/aanmelden.html" class="c-nav__link js-login-header">Aanmelden</a></li>
                             </ul>
@@ -63,13 +62,15 @@
             </div>
         </div>
         <section class="o-row o-row--sm">
-            <div class="o-container js-sensor">
+            <div class="o-container">
                 <div class="c-page-nav">
-                    <p class="is-selected"><a class="c-page-nav__link first" href="/sensoren-temperatuur.html">Temperatuur</a></p>
-                    <p><a class="c-page-nav__link" href="/sensoren-luchtkwaliteit.html">Luchtkwaliteit</a></p>
+                    <p class="is-selected"><a class="c-page-nav__link first" href="/agenda-kalender.html">Kalender</a></p>
+                    <p><a class="c-page-nav__link" href="/agenda-activiteit-toevoegen.html">Activiteit toevoegen</a></p>
+                    <p><a class="c-page-nav__link" href="/agenda-links-beheren.html">Links beheren</a></p>
                 </div>
-                <input type="date" class="js-chartDate">
-                <canvas class="c-chart js-chart js-temperatuur" width="400" height="200"></canvas>
+                <div class="c-calendar js-calendar">
+                </div>
+                <div class="js-event"></div>
             </div>
         </section>
         <!-- <footer class="c-footer">
@@ -89,7 +90,7 @@
             <nav class="c-nav">
                 <ul class="o-list c-nav__list">
                     <li class="c-nav__item"><a href="/agenda-kalender.html" class="c-nav__link">Agenda</a></li>
-                    <li class="c-nav__item  is-selected"><a href="/sensoren-temperatuur.html" class="c-nav__link">Sensoren</a></li>
+                    <li class="c-nav__item"><a href="/sensoren-temperatuur.html" class="c-nav__link">Sensoren</a></li>
                     <li class="c-nav__item"><a href="/berichten.html" class="c-nav__link">Berichten</a></li>
                     <li class="c-nav__item"><a href="/aanmelden.html" class="c-nav__link js-login-header">Aanmelden</a></li>
                 </ul>
