@@ -978,6 +978,23 @@ a:focus {
 .c-event__info p {
     font-size: 14px;
     margin: 0;
+    line-height: 21px;
+}
+
+.c-event__info a,
+.c-event__info a:visited {
+    color: #0F2027;
+    font-size: 14px;
+    line-height: 21px;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+.c-event__info a:hover,
+.c-event__info a:focus {
+    color: #0F2027;
+    opacity: 0.7;
 }
 
 @media(min-width: 768px) {
@@ -988,7 +1005,126 @@ a:focus {
     .c-event__info p {
         font-size: 18px;
     }
-};
+}
+
+/*
+    Component: Popup
+    ---
+    Popup screen of the website
+*/
+
+.c-popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
+.c-popup__bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #C1D1D9;
+    opacity: 0.7;
+}
+
+.c-popup__screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.c-popup__screen div {
+    position: fixed;
+    background: white;
+    width: 85%;
+    padding: 24px;
+}
+
+.c-popup__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    float: right;
+    cursor: pointer;
+}
+
+.c-popup__close__svg {
+    fill: #0F2027;
+    height: 100%;
+}
+
+.c-popup__popup h2 {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.c-popup__popup p {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.c-popup__screen input[type=text] {
+    border: 0;
+    border-bottom: 1px solid rgba(15, 32, 39, 0.3);
+    width: 100%;
+}
+
+.c-popup__screen a {
+    margin-top: 24px;
+}
+
+.c-popup__screen a,
+.c-popup__screen a:visited {
+    color: #0F2027;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+}
+
+.c-popup__screen a:hover,
+.c-popup__screen a:focus {
+    color: #0F2027;
+    opacity: 0.7;
+}
+
+.c-popup__screen a:nth-of-type(1) {
+    color: #666F73;
+    float: left;
+}
+
+.c-popup__screen a:nth-of-type(2) {
+    float: right;
+}
+
+@media(min-width: 600px) {
+    .c-popup__screen h2 {
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+
+    .c-popup__screen p {
+        font-size: 20px;
+    }
+
+    .c-popup__screen input[type=text] {
+        width: 80%;
+    }
+}
+
+@media(min-width: 768px) {
+    .c-popup__screen div {
+        width: 680px;
+    }
+}
 
 /*
     Component: footer

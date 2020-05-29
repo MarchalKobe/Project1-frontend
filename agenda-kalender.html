@@ -71,10 +71,32 @@
                 <div class="c-calendar js-calendar">
                 </div>
                 <div class="js-event">
-                    
                 </div>
             </div>
         </section>
+        <div class="c-popup js-editor">
+            <div class="c-popup__bg"></div>
+            <div class="c-popup__screen">
+                <div>
+                    <button class="o-button-reset c-popup__close js-editorClose">
+                        <svg class="c-popup__close__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                    <h2>Activiteit bewerken</h2>
+                    <p>
+                        <label for="name">Activiteit:</label>
+                        <input class="js-editorEvent" type="text" name="name" placeholder="Vul in..">
+                    </p>
+                    <p>
+                        <label for="date">Datum en uur:</label>
+                        <input class="js-editorDate" type="datetime-local" name="date">
+                    </p>
+                    <a class="js-editorDelete">Verwijderen</a>
+                    <a class="js-editorSafe">Opslaan</a>
+                </div>
+            </div>
+        </div>
         <!-- <footer class="c-footer">
             <p>&copy; 2020 EasyTalk - Kobe Marchal</p>
         </footer> -->

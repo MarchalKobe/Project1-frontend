@@ -2,6 +2,7 @@
 let html_calendar, html_calendarDayNames, html_calendarDays, html_event;
 let html_calendarButtonPrev, html_calendarButtonNext;
 let html_calendarLabel;
+let html_editor, html_editButton, html_editorEvent, html_editorData, html_editorClose, html_editorDelete, html_editorSafe;
 let calendarMonth, calendarYear;
 //#endregion
 
@@ -174,26 +175,36 @@ const showEvents = function(jsonObject) {
     html_event = document.querySelector(".js-event");
     const date = new Date(jsonObject.activiteiten[0].Datum);
     let day = String(date.getDate());
-    const month = getMonth(date.getMonth());
+    let month = String(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const monthName = getMonth(month - 1);
+
+    if(month.length == 1) {
+        month = `0${month}`;
+    };
 
     if(day.length == 1) {
-        day = `0${month}`;
+        day = `0${day}`;
     };
     
     let html = `
         <div class="c-event">
             <div class="c-event__date">
                 <h2>${day}</h2>
-                <h3>${month}</h3>
+                <h3>${monthName}</h3>
             </div>
             <div>
     `;
 
     for(const event of jsonObject.activiteiten) {
+        const time = event.Datum.slice(event.Datum.indexOf(":") - 2, event.Datum.indexOf(":") + 6);
+        const fullDate = `${year}-${month}-${day}T${time}`;
+        
         html += `
             <div class="c-event__info">
                 <h3>${event.Activiteit}</h3>
-                <p>${event.Datum.slice(event.Datum.indexOf(":") - 2, event.Datum.indexOf(":") + 6)} uur</p>
+                <p>${time} uur</p>
+                <a class="js-toggleEdit" data-id="${event.ActiviteitID}" data-event="${event.Activiteit}" data-date="${fullDate}">bewerken</a>
             </div>
         `;
     };
@@ -204,6 +215,7 @@ const showEvents = function(jsonObject) {
     `;
 
     html_event.innerHTML = html;
+    listenToEditButtonClick();
 };
 //#endregion
 
@@ -282,6 +294,30 @@ const listenToEventButtons = function() {
             handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.date}`, showEvents);
         });
     };
+};
+
+const listenToEditButtonClick = function() {
+    html_editor = document.querySelector(".js-editor");
+    html_editButton = document.querySelectorAll(".js-toggleEdit");
+    html_editorEvent = document.querySelector(".js-editorEvent");
+    html_editorData = document.querySelector(".js-editorDate");
+    html_editorClose = document.querySelector(".js-editorClose");
+    html_editorDelete = document.querySelector(".js-editorDelete");
+    html_editorSafe = document.querySelector(".js-editorSafe");
+
+    for(const button of html_editButton) {
+        button.addEventListener("click", function() {
+            html_editor.style.display = "inherit";
+            html_editorEvent.value = this.dataset.event;
+            html_editorData.value = this.dataset.date;
+            html_editorDelete.dataset.id = this.dataset.id;
+            html_editorSafe.dataset.id = this.dataset.id;
+        });
+    };
+
+    html_editorClose.addEventListener("click", function(){
+        html_editor.style.display = "none";
+    });
 };
 //#endregion
 
