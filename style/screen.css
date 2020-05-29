@@ -944,7 +944,7 @@ a:focus {
 .c-event {
     margin-top: 32px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .c-event__date {
@@ -967,16 +967,28 @@ a:focus {
 
 .c-event__info {
     margin-left: 18px;
+    margin-top: 20px;
 }
 
 .c-event__info h3 {
     margin: 0;
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .c-event__info p {
+    font-size: 14px;
     margin: 0;
 }
+
+@media(min-width: 768px) {
+    .c-event__info h3 {
+        font-size: 32px;
+    }
+    
+    .c-event__info p {
+        font-size: 18px;
+    }
+};
 
 /*
     Component: footer

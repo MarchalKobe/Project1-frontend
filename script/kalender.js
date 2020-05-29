@@ -147,53 +147,63 @@ const showCalenderDayNamesFull = function() {
 };
 
 const showCalendarEvents = function(jsonObject) {
-    html_event = document.querySelector(".js-event");
+    for(const event of jsonObject.days) {
+        const date = new Date(event.Datum);
+        let day = String(date.getDate());
+        let month = String(date.getMonth() + 1);
+        const year = date.getFullYear();
 
-    let dateFirst = new Date(jsonObject.activiteiten[0].Datum);
-    lastDay = dateFirst.getDate();
-    sameDayEvents = [];
-    sameDayHours = [];
-
-    for(const event of jsonObject.activiteiten) {
-        let date = new Date(event.Datum);
-        day = date.getDate();
-        
-        let eventDay = document.querySelector(`[data-day="${day}"]`);
-        eventDay.innerHTML = `<div class="c-calendar__days--item-event" data-month="${getMonth(date.getMonth())}">${day}</div>`;
-
-        sameDayEvents.push(event.Activiteit);
-        sameDayHours.push(event.Datum.slice(event.Datum.indexOf(":") - 2, event.Datum.indexOf(":") + 6));
-        
-        if(day != lastDay) {
-            console.log(`${day}:`);
-            console.log(sameDayEvents);
-            console.log(sameDayHours);
-            sameDayEvents = [];
-            sameDayHours = [];
+        if(day.length == 1) {
+            day = `0${month}`;
         };
 
-        lastDay = day;
+        if(month.length == 1) {
+            month = `0${month}`;
+        };
+
+        const fullDate = `${year}-${month}-${day}`;
+
+        let eventDay = document.querySelector(`[data-day="${day}"]`);
+        eventDay.innerHTML = `<div class="c-calendar__days--item-event" data-date="${fullDate}">${day}</div>`;
     };
 
-    const events = document.querySelectorAll(".c-calendar__days--item-event");
+    listenToEventButtons();
+};
 
-    for(const event of events) {
-        event.addEventListener("click", function() {
-            // html_event.innerHTML = `
-            //     <div class="c-event">
-            //         <div class="c-event__date">
-            //             <h2>${this.innerHTML}</h2>
-            //             <h3>${this.dataset.month}</h3>
-            //         </div>
+const showEvents = function(jsonObject) {
+    html_event = document.querySelector(".js-event");
+    const date = new Date(jsonObject.activiteiten[0].Datum);
+    let day = String(date.getDate());
+    const month = getMonth(date.getMonth());
 
-            //         <div class="c-event__info">
-            //             <h3>${event.Activiteit}</h3>
-            //             <p>${event.Datum.slice(event.Datum.indexOf(":") - 2, event.Datum.indexOf(":") + 6)} uur</p>
-            //         </div>
-            //     </div>
-            // `;
-        });
+    if(day.length == 1) {
+        day = `0${month}`;
     };
+    
+    let html = `
+        <div class="c-event">
+            <div class="c-event__date">
+                <h2>${day}</h2>
+                <h3>${month}</h3>
+            </div>
+            <div>
+    `;
+
+    for(const event of jsonObject.activiteiten) {
+        html += `
+            <div class="c-event__info">
+                <h3>${event.Activiteit}</h3>
+                <p>${event.Datum.slice(event.Datum.indexOf(":") - 2, event.Datum.indexOf(":") + 6)} uur</p>
+            </div>
+        `;
+    };
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    html_event.innerHTML = html;
 };
 //#endregion
 
@@ -210,7 +220,7 @@ const getCalendarEvents = function() {
 
     date = `${calendarYear}-${month}`;
     
-    handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${date}`, showCalendarEvents);
+    handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${date}/days`, showCalendarEvents);
 };
 //#endregion
 
@@ -258,6 +268,21 @@ const listenToButtonClick = function() {
         getCalendarEvents();
     });
 }
+
+const listenToEventButtons = function() {
+    const events = document.querySelectorAll(".c-calendar__days--item-event");
+
+    for(const event of events) {
+        event.addEventListener("click", function() {
+            for(const event2 of events) {
+                event2.classList.remove("c-calendar__days--item-event-selected");
+            }
+
+            this.classList.add("c-calendar__days--item-event-selected");
+            handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.date}`, showEvents);
+        });
+    };
+};
 //#endregion
 
 //#region ***  INIT / DOMContentLoaded  ***
