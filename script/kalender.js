@@ -361,7 +361,7 @@ const listenToEditButtonClick = function() {
         button.addEventListener("click", function() {
             html_editor.style.display = "inherit";
 
-            if(this.dataset.link == "true") {
+            if(this.dataset.link == "false") {
                 html_eventEditContent.style.display = "inherit";
                 html_eventEditContentError.style.display = "none";
 

@@ -1131,6 +1131,59 @@ a:focus {
 }
 
 /*
+    Component: Content
+    ---
+    Content box of the website
+*/
+
+.c-content {
+    margin: 0 auto;
+    width: 592px;
+}
+
+.c-content__subtitle {
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.c-content__label {
+    float: left;
+}
+
+.c-content__textinput {
+    overflow: hidden;
+    display: block;
+}
+
+.c-content__textinput input {
+    margin-bottom: 24px;
+    width: 100%;
+    padding: 4px;
+    border: none;
+    border-bottom: 1px solid rgba(15, 32, 39, 0.3);
+}
+
+.c-content__dateinput {
+    padding: 4px;
+}
+
+.c-content__submit,
+.c-content__submit:visited {
+    float: right;
+    color: #0F2027;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.c-content__submit:hover,
+.c-content__submit:focus {
+    color: #0F2027;
+    opacity: 0.7;
+}
+
+/*
     Component: footer
     ---
     Main footer of the website

@@ -113,6 +113,10 @@ const init = function() {
         };
     };
 
+    if(document.querySelector(".js-add-event")) {
+        listenToAddEventButton();
+    };
+
     if(token) {
         showLogoutButton();
     };
