@@ -12,6 +12,18 @@ const showLogoutButton = function() {
 
     listenToLogoutButtons();
 };
+
+const showNotLoggedIn = function() {
+    html_sensor = document.querySelector(".js-not-logged-in");
+
+    html_sensor.innerHTML = `
+        <div class="c-login-fault">
+            <h2 class="c-login-fault__title">Je moet aangemeld zijn!</h2>
+            <p class="c-login-fault__text">Om deze pagina te bezoeken moet je aangemeld zijn.</p>
+            <a class="c-cta" href="/aanmelden.html">Aanmelden</a>
+        </div>
+    `;
+};
 //#endregion
 
 //#region ***  Callback-No Visualisation - callback___  ***
@@ -68,6 +80,8 @@ const toggleNav = function() {
 };
 
 const init = function() {
+    const token = sessionStorage.getItem("token");
+
     toggleNav();
 
     if(document.querySelector(".js-time")) {
@@ -92,10 +106,12 @@ const init = function() {
     };
 
     if(document.querySelector(".js-calendar")) {
-        showCalendarInformation();
+        if(token) {
+            showCalendarInformation();
+        } else {
+            showNotLoggedIn();
+        };
     };
-
-    const token = sessionStorage.getItem("token");
 
     if(token) {
         showLogoutButton();

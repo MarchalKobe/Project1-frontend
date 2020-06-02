@@ -44,7 +44,7 @@
                     <div class="c-header__nav">
                         <nav class="c-nav">
                             <ul class="o-list c-nav__list">
-                                <li class="c-nav__item"><a href="/agenda-kalender.html" class="c-nav__link">Agenda</a></li>
+                                <li class="c-nav__item is-selected"><a href="/agenda-kalender.html" class="c-nav__link">Agenda</a></li>
                                 <li class="c-nav__item"><a href="/sensoren-temperatuur.html" class="c-nav__link">Sensoren</a></li>
                                 <li class="c-nav__item"><a href="/berichten.html" class="c-nav__link">Berichten</a></li>
                                 <li class="c-nav__item"><a href="/aanmelden.html" class="c-nav__link js-login-header">Aanmelden</a></li>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <section class="o-row o-row--sm">
-            <div class="o-container">
+            <div class="o-container js-not-logged-in">
                 <div class="c-page-nav">
                     <p class="is-selected"><a class="c-page-nav__link first" href="/agenda-kalender.html">Kalender</a></p>
                     <p><a class="c-page-nav__link" href="/agenda-activiteit-toevoegen.html">Activiteit toevoegen</a></p>
@@ -84,16 +84,20 @@
                         </svg>
                     </button>
                     <h2>Activiteit bewerken</h2>
-                    <p>
-                        <label for="name">Activiteit:</label>
-                        <input class="js-editorEvent" type="text" name="name" placeholder="Vul in..">
-                    </p>
-                    <p>
-                        <label for="date">Datum en uur:</label>
-                        <input class="js-editorDate" type="datetime-local" name="date">
-                    </p>
-                    <a class="js-editorDelete">Verwijderen</a>
-                    <a class="js-editorSafe">Opslaan</a>
+                    <span class="js-event-edit-content">
+                        <p>
+                            <label for="name">Activiteit:</label>
+                            <input class="js-editorEvent" type="text" name="name" placeholder="Vul in..">
+                        </p>
+                        <p>
+                            <label for="date">Datum en uur:</label>
+                            <input class="js-editorDate" type="datetime-local" name="date">
+                        </p>
+                        <a class="js-editorDelete">Verwijderen</a>
+                        <a class="js-editorSafe">Opslaan</a>
+                    </span>
+                    <span class="c-popup__screen-error js-event-edit-content-error">
+                    </span>
                 </div>
             </div>
         </div>
@@ -113,7 +117,7 @@
             </div>
             <nav class="c-nav">
                 <ul class="o-list c-nav__list">
-                    <li class="c-nav__item"><a href="/agenda-kalender.html" class="c-nav__link">Agenda</a></li>
+                    <li class="c-nav__item is-selected"><a href="/agenda-kalender.html" class="c-nav__link">Agenda</a></li>
                     <li class="c-nav__item"><a href="/sensoren-temperatuur.html" class="c-nav__link">Sensoren</a></li>
                     <li class="c-nav__item"><a href="/berichten.html" class="c-nav__link">Berichten</a></li>
                     <li class="c-nav__item"><a href="/aanmelden.html" class="c-nav__link js-login-header">Aanmelden</a></li>

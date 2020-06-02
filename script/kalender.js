@@ -2,7 +2,7 @@
 let html_calendar, html_calendarDayNames, html_calendarDays, html_event;
 let html_calendarButtonPrev, html_calendarButtonNext;
 let html_calendarLabel;
-let html_editor, html_editButton, html_editorEvent, html_editorData, html_editorClose, html_editorDelete, html_editorSafe;
+let html_editor, html_editButton, html_editorEvent, html_editorData, html_editorClose, html_editorDelete, html_editorSafe, html_eventEditContent, html_eventEditContentError;
 let calendarMonth, calendarYear;
 //#endregion
 
@@ -155,7 +155,7 @@ const showCalendarEvents = function(jsonObject) {
         const year = date.getFullYear();
 
         if(day.length == 1) {
-            day = `0${month}`;
+            day = `0${day}`;
         };
 
         if(month.length == 1) {
@@ -164,8 +164,8 @@ const showCalendarEvents = function(jsonObject) {
 
         const fullDate = `${year}-${month}-${day}`;
 
-        let eventDay = document.querySelector(`[data-day="${day}"]`);
-        eventDay.innerHTML = `<div class="c-calendar__days--item-event" data-date="${fullDate}">${day}</div>`;
+        let eventDay = document.querySelector(`[data-day="${date.getDate()}"]`);
+        eventDay.innerHTML = `<div class="c-calendar__days--item-event" data-date="${fullDate}">${date.getDate()}</div>`;
     };
 
     listenToEventButtons();
@@ -199,12 +199,17 @@ const showEvents = function(jsonObject) {
     for(const event of jsonObject.activiteiten) {
         const time = event.Datum.slice(event.Datum.indexOf(":") - 2, event.Datum.indexOf(":") + 6);
         const fullDate = `${year}-${month}-${day}T${time}`;
+        let link = true;
+
+        if(event.LinkID == null) {
+            link = false;
+        };
         
         html += `
             <div class="c-event__info">
                 <h3>${event.Activiteit}</h3>
                 <p>${time} uur</p>
-                <a class="js-toggleEdit" data-id="${event.ActiviteitID}" data-event="${event.Activiteit}" data-date="${fullDate}">bewerken</a>
+                <a class="js-toggleEdit" data-id="${event.ActiviteitID}" data-event="${event.Activiteit}" data-date="${fullDate}" data-link="${link}">bewerken</a>
             </div>
         `;
     };
@@ -216,6 +221,43 @@ const showEvents = function(jsonObject) {
 
     html_event.innerHTML = html;
     listenToEditButtonClick();
+};
+
+const showSafeButtonMessage = function(jsonObject) {
+    html_eventEditContent = document.querySelector(".js-event-edit-content");
+    html_eventEditContentError = document.querySelector(".js-event-edit-content-error");
+
+    html_eventEditContent.style.display = "none";
+    html_eventEditContentError.style.display = "inherit";
+    html_eventEditContentError.innerHTML = jsonObject.message;
+
+    const token = sessionStorage.getItem("token");
+
+    if(jsonObject.date && token) {
+        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${jsonObject.date}`, showEvents, null, "GET", null, token);
+    };
+};
+
+const showSafeButtonError = function(jsonObject) {
+    html_eventEditContent = document.querySelector(".js-event-edit-content");
+    html_eventEditContentError = document.querySelector(".js-event-edit-content-error");
+
+    html_eventEditContent.style.display = "none";
+    html_eventEditContentError.style.display = "inherit";
+    html_eventEditContentError.innerHTML = jsonObject.message;
+};
+
+const showDeleteButtonMessage = function(jsonObject) {
+    html_eventEditContent = document.querySelector(".js-event-edit-content");
+    html_eventEditContentError = document.querySelector(".js-event-edit-content-error");
+    html_event = document.querySelector(".js-event");
+
+    html_eventEditContent.style.display = "none";
+    html_eventEditContentError.style.display = "inherit";
+    html_eventEditContentError.innerHTML = jsonObject.message;
+
+    showCalendarInformation();
+    html_event.innerHTML = "";
 };
 //#endregion
 
@@ -232,7 +274,11 @@ const getCalendarEvents = function() {
 
     date = `${calendarYear}-${month}`;
     
-    handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${date}/days`, showCalendarEvents);
+    const token = sessionStorage.getItem("token");
+    
+    if(token) {
+        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${date}/days`, showCalendarEvents, null, "GET", null, token);
+    };
 };
 //#endregion
 
@@ -291,7 +337,11 @@ const listenToEventButtons = function() {
             }
 
             this.classList.add("c-calendar__days--item-event-selected");
-            handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.date}`, showEvents);
+            const token = sessionStorage.getItem("token");
+
+            if(token) {
+                handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.date}`, showEvents, null, "GET", null, token);
+            };
         });
     };
 };
@@ -304,14 +354,47 @@ const listenToEditButtonClick = function() {
     html_editorClose = document.querySelector(".js-editorClose");
     html_editorDelete = document.querySelector(".js-editorDelete");
     html_editorSafe = document.querySelector(".js-editorSafe");
+    html_eventEditContent = document.querySelector(".js-event-edit-content");
+    html_eventEditContentError = document.querySelector(".js-event-edit-content-error");
 
     for(const button of html_editButton) {
         button.addEventListener("click", function() {
             html_editor.style.display = "inherit";
-            html_editorEvent.value = this.dataset.event;
-            html_editorData.value = this.dataset.date;
-            html_editorDelete.dataset.id = this.dataset.id;
-            html_editorSafe.dataset.id = this.dataset.id;
+
+            if(this.dataset.link == "true") {
+                html_eventEditContent.style.display = "inherit";
+                html_eventEditContentError.style.display = "none";
+
+                html_editorEvent.value = this.dataset.event;
+                html_editorData.value = this.dataset.date;
+                html_editorDelete.dataset.id = this.dataset.id;
+                html_editorSafe.dataset.id = this.dataset.id;
+
+                html_editorDelete.addEventListener("click", function() {
+                    const token = sessionStorage.getItem("token");
+
+                    if(token) {
+                        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.id}`, showDeleteButtonMessage, null, "DELETE", null, token);
+                    };
+                });
+
+                html_editorSafe.addEventListener("click", function() {
+                    const info = {
+                        event: html_editorEvent.value,
+                        date: html_editorData.value
+                    };
+
+                    const token = sessionStorage.getItem("token");
+
+                    if(token) {
+                        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.id}`, showSafeButtonMessage, showSafeButtonError, "PUT", JSON.stringify(info), token);
+                    };
+                });
+            } else {
+                html_eventEditContent.style.display = "none";
+                html_eventEditContentError.style.display = "inherit";
+                html_eventEditContentError.innerHTML = "Deze activiteit is gelinkt aan een externe kalender en kan dus niet worden bewerkt."
+            };
         });
     };
 

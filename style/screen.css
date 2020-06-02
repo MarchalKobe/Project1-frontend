@@ -1047,6 +1047,10 @@ a:focus {
     padding: 24px;
 }
 
+.c-popup__screen-error {
+    display: none;
+}
+
 .c-popup__close {
     display: flex;
     align-items: center;
