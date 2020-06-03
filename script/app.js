@@ -114,7 +114,19 @@ const init = function() {
     };
 
     if(document.querySelector(".js-add-event")) {
-        listenToAddEventButton();
+        if(token) {
+            listenToAddEventButton();
+        } else {
+            showNotLoggedIn();
+        };
+    };
+
+    if(document.querySelector(".js-add-link")) {
+        if(token) {
+            getLinks();
+        } else {
+            showNotLoggedIn();
+        };
     };
 
     if(token) {

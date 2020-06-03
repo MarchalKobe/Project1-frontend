@@ -526,6 +526,7 @@ a:focus {
     margin-bottom: 24px;
     width: 32px;
     height: 32px;
+    cursor: pointer;
 }
 
 .c-nav-trigger__svg {
@@ -1066,7 +1067,7 @@ a:focus {
     height: 100%;
 }
 
-.c-popup__popup h2 {
+/* .c-popup__popup h2 {
     font-size: 22px;
     letter-spacing: 2px;
     margin-bottom: 16px;
@@ -1075,9 +1076,23 @@ a:focus {
 .c-popup__popup p {
     font-size: 18px;
     margin-bottom: 8px;
+} */
+
+.c-popup__screen p {
+    margin-bottom: 8px;
+}
+
+.c-popup__screen label {
+    float: left;
+}
+
+.c-popup__screen span {
+    overflow: hidden;
+    display: block;
 }
 
 .c-popup__screen input[type=text] {
+    margin-left: 8px;
     border: 0;
     border-bottom: 1px solid rgba(15, 32, 39, 0.3);
     width: 100%;
@@ -1109,6 +1124,11 @@ a:focus {
     float: right;
 }
 
+.c-popup__screen-link {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 @media(min-width: 600px) {
     .c-popup__screen h2 {
         font-size: 28px;
@@ -1120,7 +1140,6 @@ a:focus {
     }
 
     .c-popup__screen input[type=text] {
-        width: 80%;
     }
 }
 
@@ -1138,13 +1157,14 @@ a:focus {
 
 .c-content {
     margin: 0 auto;
-    width: 592px;
+    width: 100%;
 }
 
 .c-content__subtitle {
-    font-size: 24px;
+    font-size: 22px;
     letter-spacing: 1px;
     margin-bottom: 16px;
+    clear: both;
 }
 
 .c-content__label {
@@ -1181,6 +1201,38 @@ a:focus {
 .c-content__submit:focus {
     color: #0F2027;
     opacity: 0.7;
+}
+
+.c-content__link {
+    display: flex;
+    align-self: center;
+}
+
+.c-content__link p {
+    margin-bottom: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.c-delete-event {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.c-delete-event__svg {
+    fill: #0F2027;
+    height: 100%;
+}
+
+@media(min-width: 768px) {
+    .c-content {
+        width: 592px;
+    }
+
+    .c-content__subtitle {
+        font-size: 24px;
+    }
 }
 
 /*
@@ -1239,6 +1291,10 @@ a:focus {
 
 .u-color-neutral-light {
     color: #386A80;
+}
+
+.u-color-error {
+    color: #ED4337;
 }
 
 /* .u-color-neutral-base {

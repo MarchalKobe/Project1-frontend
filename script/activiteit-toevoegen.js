@@ -10,6 +10,14 @@ const showAddEventMessage = function(jsonObject) {
         <p>Activiteit succesvol toegevoegd aan de kalender</p>
     `;
 };
+
+const showAddEventError = function(jsonObject) {
+    html_addEvent = document.querySelector(".js-add-event");
+    html_addEvent.innerHTML = `
+        <h2 class="c-content__subtitle">Activiteit</h2>
+        <p class="u-color-error">Activiteit niet toegevoegd, vul de velden juist in.</p>
+    `;
+};
 //#endregion
 
 //#region ***  Callback-No Visualisation - callback___  ***
@@ -32,8 +40,12 @@ const listenToAddEventButton = function() {
             event: event,
             date: date
         };
+        
+        const token = sessionStorage.getItem("token");
 
-        handleData("http://192.168.0.120:5000/api/v1/activiteiten", showAddEventMessage, null, "PUT", JSON.stringify(data));
+        if(token) {
+            handleData("http://192.168.0.120:5000/api/v1/activiteiten", showAddEventMessage, showAddEventError, "PUT", JSON.stringify(data), token);
+        }
     });
 };
 //#endregion
