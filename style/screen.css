@@ -1120,7 +1120,8 @@ a:focus {
     float: left;
 }
 
-.c-popup__screen a:nth-of-type(2) {
+.c-popup__screen a:nth-of-type(2),
+.c-popup__screen a:nth-of-type(3) {
     float: right;
 }
 

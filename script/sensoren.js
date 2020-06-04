@@ -1,10 +1,12 @@
 //#region ***  DOM references ***
-let chartDate, chartLabel, chartBackgroundColor, chartBorderColor, chartTickSymbol, chartType;
+let myChart, chartDate, chartLabel, chartBackgroundColor, chartBorderColor, chartTickSymbol, chartType;
 let html_chart, html_chartDate, html_chartPrev, html_chartNext, html_sensor;
+let doOnce = true;
 //#endregion
 
 //#region ***  Callback-Visualisation - show___ ***
 const showChart = function(jsonObject) {
+    html_chart = document.querySelector(".js-chart");
     html_chartDate = document.querySelector(".js-chartDate");
     html_chartDate.value = chartDate;
 
@@ -43,8 +45,12 @@ const showChart = function(jsonObject) {
         };
     }
 
-    const ctx = document.querySelector(".js-chart").getContext('2d');
-    const myChart = new Chart(ctx, {
+    if(myChart instanceof Chart) {
+        myChart.destroy();
+    };
+    
+    const ctx = html_chart.getContext('2d');
+    myChart = new Chart(ctx, {
         type: chartType,
         data: {
             labels: labels,
@@ -86,8 +92,11 @@ const getValuesTemperatuur = function(date) {
 
     if(token) {
         handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
-        listenToChartDateChange();
-        listenToChartResizeScreen();
+        if(doOnce) {
+            listenToChartDateChange();
+            listenToChartResizeScreen();
+            doOnce = false;
+        };
     } else {
         showNotLoggedIn();
     };
@@ -102,8 +111,11 @@ const getValuesLuchtkwaliteit = function(date) {
 
     if(token) {
         handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
-        listenToChartDateChange();
-        listenToChartResizeScreen();
+        if(doOnce) {
+            listenToChartDateChange();
+            listenToChartResizeScreen();
+            doOnce = false;
+        };
     } else {
         showNotLoggedIn();
     };

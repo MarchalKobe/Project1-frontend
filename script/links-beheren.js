@@ -1,5 +1,7 @@
 //#region ***  DOM references ***
-let html_links, html_deleteButtons, html_popup, html_popupClose, html_popupTitle, html_popupSubtitle, html_popupUrl, html_popupNo, html_popupYes, html_linkAdd, html_link, html_popupContent, html_popupContentError;
+let html_links, html_deleteButtons, html_popup, html_popupClose, html_popupTitle, html_popupSubtitle, html_popupUrl, html_popupNo, html_popupYesRemove, html_popupYesAdd, html_linkAdd, html_link, html_popupContent, html_popupContentError;
+let doOnceAdd = true;
+let doOnceRemove = true;
 //#endregion
 
 //#region ***  Callback-Visualisation - show___ ***
@@ -83,7 +85,8 @@ const listenLinkButtons = function() {
     html_popupSubtitle = document.querySelector(".js-popup-subtitle");
     html_popupUrl = document.querySelector(".js-popup-url");
     html_popupNo = document.querySelector(".js-popup-no");
-    html_popupYes = document.querySelector(".js-popup-yes");
+    html_popupYesRemove = document.querySelector(".js-popup-yes-remove");
+    html_popupYesAdd = document.querySelector(".js-popup-yes-add");
     html_link = document.querySelector(".js-link");
     html_linkAdd = document.querySelector(".js-link-add");
     html_deleteButtons = document.querySelectorAll(".js-delete-button");
@@ -104,19 +107,26 @@ const listenLinkButtons = function() {
         html_popupSubtitle.innerHTML = "Ben je zeker dat je deze link wilt toevoegen? (Kan even duren)";
         html_popupUrl.innerHTML = `Link: ${html_link.value}`;
 
-        html_popupYes.addEventListener("click", function() {
-            const data = {
-                url: html_link.value
-            }
+        html_popupYesRemove.style.display = "none";
+        html_popupYesAdd.style.display = "inherit";
 
-            const token = sessionStorage.getItem("token");
+        if(doOnceAdd) {
+            html_popupYesAdd.addEventListener("click", function() {
+                const data = {
+                    url: html_link.value
+                }
+    
+                const token = sessionStorage.getItem("token");
+    
+                if(token) {
+                    handleData(`http://192.168.0.120:5000/api/v1/links`, showLinkAddMessage, showLinkAddError, "PUT", JSON.stringify(data), token);
+                };
+    
+                //html_popupYesAdd.removeEventListener("click", arguments.callee);
+            });
 
-            if(token) {
-                handleData(`http://192.168.0.120:5000/api/v1/links`, showLinkAddMessage, showLinkAddError, "PUT", JSON.stringify(data), token);
-            };
-
-            html_popupYes.removeEventListener("click", arguments.callee);
-        });
+            doOnceAdd = false;
+        };
     });
 
     for(const button of html_deleteButtons) {
@@ -124,6 +134,9 @@ const listenLinkButtons = function() {
             html_popupContentError.style.display = "none";
             html_popupContent.style.display = "inherit";
             html_popup.style.display = "inherit";
+            html_popupYesRemove.style.display = "inherit";
+            html_popupYesAdd.style.display = "none";
+
             html_popupClose.addEventListener("click", function() {
                 html_popup.style.display = "none";
             });
@@ -135,21 +148,23 @@ const listenLinkButtons = function() {
             html_popupTitle.innerHTML = "Link verwijderen";
             html_popupSubtitle.innerHTML = "Ben je zeker dat je deze link wilt verwijderen?";
             html_popupUrl.innerHTML = `Link: ${this.dataset.url}`;
-            html_popupYes.dataset.id = this.dataset.id;
+            html_popupYesRemove.dataset.id = this.dataset.id;
 
-            html_popupYes.addEventListener("click", function() {
-                const token = sessionStorage.getItem("token");
+            if(doOnceRemove) {
+                html_popupYesRemove.addEventListener("click", function() {
+                    const token = sessionStorage.getItem("token");
+    
+                    if(token) {
+                        handleData(`http://192.168.0.120:5000/api/v1/links/${this.dataset.id}`, showLinkRemoveMessage, null, "DELETE", null, token);
+                    };
+                    
+                    //html_popupYesRemove.removeEventListener("click", arguments.callee);
+                });
 
-                if(token) {
-                    handleData(`http://192.168.0.120:5000/api/v1/links/${this.dataset.id}`, showLinkRemoveMessage, null, "DELETE", null, token);
-                };
-                
-                html_popupYes.removeEventListener("click", arguments.callee);
-            });
+                doOnceRemove = false;
+            };
         });
     };
-
-
 };
 //#endregion
 
