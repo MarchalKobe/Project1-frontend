@@ -40,10 +40,12 @@ const showLinkRemoveMessage = function(jsonObject) {
 const showLinkAddMessage = function(jsonObject) {
     html_popupContent = document.querySelector(".js-popup-content");
     html_popupContentError = document.querySelector(".js-popup-content-error");
+    html_link = document.querySelector(".js-link");
 
     html_popupContent.style.display = "none";
     html_popupContentError.style.display = "inherit";
     html_popupContentError.innerHTML = `<span>Activiteit succesvol toegevoegd aan de kalender</span>`;
+    html_link.value = ""
 
     window.setTimeout(getLinks, 250);
 };
@@ -99,7 +101,7 @@ const listenLinkButtons = function() {
         });
 
         html_popupTitle.innerHTML = "Link toevoegen";
-        html_popupSubtitle.innerHTML = "Ben je zeker dat je deze link wilt toevoegen?";
+        html_popupSubtitle.innerHTML = "Ben je zeker dat je deze link wilt toevoegen? (Kan even duren)";
         html_popupUrl.innerHTML = `Link: ${html_link.value}`;
 
         html_popupYes.addEventListener("click", function() {
@@ -112,6 +114,8 @@ const listenLinkButtons = function() {
             if(token) {
                 handleData(`http://192.168.0.120:5000/api/v1/links`, showLinkAddMessage, showLinkAddError, "PUT", JSON.stringify(data), token);
             };
+
+            html_popupYes.removeEventListener("click", arguments.callee);
         });
     });
 
@@ -139,6 +143,8 @@ const listenLinkButtons = function() {
                 if(token) {
                     handleData(`http://192.168.0.120:5000/api/v1/links/${this.dataset.id}`, showLinkRemoveMessage, null, "DELETE", null, token);
                 };
+                
+                html_popupYes.removeEventListener("click", arguments.callee);
             });
         });
     };
