@@ -1140,8 +1140,8 @@ a:focus {
         font-size: 20px;
     }
 
-    .c-popup__screen input[type=text] {
-    }
+    /* .c-popup__screen input[type=text] {
+    } */
 }
 
 @media(min-width: 768px) {
