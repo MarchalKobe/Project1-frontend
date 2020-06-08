@@ -129,6 +129,10 @@ const init = function() {
         };
     };
 
+    if(document.querySelector(".js-message")) {
+        getNickname();
+    };
+
     if(token) {
         showLogoutButton();
     };

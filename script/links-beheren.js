@@ -114,7 +114,7 @@ const listenLinkButtons = function() {
             html_popupYesAdd.addEventListener("click", function() {
                 const data = {
                     url: html_link.value
-                }
+                };
     
                 const token = sessionStorage.getItem("token");
     
