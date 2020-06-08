@@ -130,7 +130,11 @@ const init = function() {
     };
 
     if(document.querySelector(".js-message")) {
-        getNickname();
+        if(token) {
+            getNickname();
+        } else {
+            showNotLoggedIn();
+        };
     };
 
     if(token) {
