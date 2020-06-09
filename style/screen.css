@@ -44,6 +44,7 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
+    outline: none;
 }
 
 /*
@@ -650,11 +651,6 @@ a:focus {
     line-height: 36px;
 }
 
-/* .c-lead--xl {
-    font-size: 32px;
-    line-height: 40px;
-} */
-
 @media (min-width: 768px) {
     .c-lead--lg {
         font-size: 30px;
@@ -824,33 +820,40 @@ a:focus {
 .c-calendar__header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: -14px;
+    align-items: center;
+    margin: 4px;
 }
 
 .c-calendar__header button {
     background: none;
     border: none;
-    padding: 8px;
-    font-size: 18px;
-    color: #0F2027;
     outline: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.c-calendar__header button svg {
+    height: 100%;
 }
 
 .c-calendar__header--label {
     font-size: 22px;
     font-weight: 200;
     letter-spacing: 1px;
+    margin-bottom: 0;
 }
 
 .c-calendar__header--prev {
     margin-left: 22px;
+    transform: rotate(180deg);
 }
 
 .c-calendar__header--next {
     margin-right: 22px;
-    transform: rotate(180deg);
 }
 
 .c-calendar__days--row {
@@ -868,7 +871,6 @@ a:focus {
 }
 
 .c-calendar__days--item {
-    /* border: 1px solid black; */
     padding: 1em;
     width: 14.28%;
     text-align: center;
@@ -889,7 +891,7 @@ a:focus {
     background: #0F2027;
     display: block;
     width: inherit;
-    margin: 0 auto;
+    margin-left: -2px;
     border-radius: 50%;
     width: 25px;
     height: 25px;
@@ -908,10 +910,6 @@ a:focus {
 @media (min-width: 425px) {
     .c-calendar__header {
         margin-bottom: 0;
-    }
-
-    .c-calendar__header button {
-        font-size: 24px;
     }
 
     .c-calendar__header--label {
@@ -939,6 +937,7 @@ a:focus {
         width: 40px;
         height: 40px;
         line-height: 40px;
+        margin: 0 auto;
     }
 }
 
@@ -1067,17 +1066,6 @@ a:focus {
     height: 100%;
 }
 
-/* .c-popup__popup h2 {
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-}
-
-.c-popup__popup p {
-    font-size: 18px;
-    margin-bottom: 8px;
-} */
-
 .c-popup__screen p {
     margin-bottom: 8px;
 }
@@ -1094,7 +1082,7 @@ a:focus {
 .c-popup__screen input[type=text] {
     margin-left: 8px;
     border: 0;
-    border-bottom: 1px solid rgba(15, 32, 39, 0.3);
+    border-bottom: 2px solid rgba(15, 32, 39, 0.3);
     width: 100%;
 }
 
@@ -1139,9 +1127,6 @@ a:focus {
     .c-popup__screen p {
         font-size: 20px;
     }
-
-    /* .c-popup__screen input[type=text] {
-    } */
 }
 
 @media(min-width: 768px) {
@@ -1161,6 +1146,27 @@ a:focus {
     width: 100%;
 }
 
+.c-content__info-button {
+    font-size: 1em;
+    border: 2.5px solid rgba(15, 32, 39, 0.8);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.c-content__info {
+    display: none;
+}
+
+.c-content__info-visable {
+    display: inherit;
+}
+
 .c-content__subtitle {
     font-size: 22px;
     letter-spacing: 1px;
@@ -1170,6 +1176,7 @@ a:focus {
 
 .c-content__label {
     float: left;
+    margin-right: 8px;
 }
 
 .c-content__textinput {
@@ -1297,14 +1304,6 @@ a:focus {
 .u-color-error {
     color: #ED4337;
 }
-
-/* .u-color-neutral-base {
-    color: #9C9EB8;
-}
-
-.u-color-neutral-dark {
-    color: #83859E;
-} */
 
 /*
     Utilities: spacing

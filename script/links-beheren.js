@@ -1,5 +1,5 @@
 //#region ***  DOM references ***
-let html_links, html_deleteButtons, html_popup, html_popupClose, html_popupTitle, html_popupSubtitle, html_popupUrl, html_popupNo, html_popupYesRemove, html_popupYesAdd, html_linkAdd, html_link, html_popupContent, html_popupContentError;
+let hmtl_info, html_infoButton, html_links, html_deleteButtons, html_popup, html_popupClose, html_popupTitle, html_popupSubtitle, html_popupUrl, html_popupNo, html_popupYesRemove, html_popupYesAdd, html_linkAdd, html_link, html_popupContent, html_popupContentError;
 let doOnceAdd = true;
 let doOnceRemove = true;
 //#endregion
@@ -77,6 +77,8 @@ const getLinks = function() {
 
 //#region ***  Event Listeners - listenTo___ ***
 const listenLinkButtons = function() {
+    html_info = document.querySelector(".js-info");
+    html_infoButton = document.querySelector(".js-info-button");
     html_popupContent = document.querySelector(".js-popup-content");
     html_popupContentError = document.querySelector(".js-popup-content-error");
     html_popup = document.querySelector(".js-popup");
@@ -90,6 +92,10 @@ const listenLinkButtons = function() {
     html_link = document.querySelector(".js-link");
     html_linkAdd = document.querySelector(".js-link-add");
     html_deleteButtons = document.querySelectorAll(".js-delete-button");
+
+    html_infoButton.addEventListener("click", function() {
+        html_info.classList.toggle("c-content__info-visable");
+    });
 
     html_linkAdd.addEventListener("click", function() {
         html_popupContentError.style.display = "none";
@@ -121,8 +127,6 @@ const listenLinkButtons = function() {
                 if(token) {
                     handleData(`http://192.168.0.120:5000/api/v1/links`, showLinkAddMessage, showLinkAddError, "PUT", JSON.stringify(data), token);
                 };
-    
-                //html_popupYesAdd.removeEventListener("click", arguments.callee);
             });
 
             doOnceAdd = false;
@@ -157,8 +161,6 @@ const listenLinkButtons = function() {
                     if(token) {
                         handleData(`http://192.168.0.120:5000/api/v1/links/${this.dataset.id}`, showLinkRemoveMessage, null, "DELETE", null, token);
                     };
-                    
-                    //html_popupYesRemove.removeEventListener("click", arguments.callee);
                 });
 
                 doOnceRemove = false;
