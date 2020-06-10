@@ -43,7 +43,6 @@ const showInformation = function() {
             <p class="c-lead c-lead--lg u-mb-sm">Informatie</p>
             <p class="c-lead c-lead--md">
                 Raspberry Pi ip: ${location.host}<br />
-                by Kobe Marchal<br />
                 Project @ MCT
             </p>
         `

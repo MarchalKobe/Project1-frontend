@@ -1249,16 +1249,28 @@ a:focus {
     Main footer of the website
 */
 
+.c-page-with-footer {
+    position: relative;
+    min-height: 100vh;
+}
+
 .c-footer {
     position: absolute;
-    top: 95%;
+    bottom: 0;
     width: 100%;
     text-align: center;
 }
 
 .c-footer p {
     margin: 0;
+    margin-bottom: 8px;
     font-size: 16px;
+}
+
+@media (min-width: 768px) {
+    .c-page-with-footer {
+        min-height: 100vh;
+    }
 }
 
 /*
