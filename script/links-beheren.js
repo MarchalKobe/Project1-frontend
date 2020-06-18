@@ -70,7 +70,7 @@ const getLinks = function() {
     const token = sessionStorage.getItem("token");
 
     if(token) {
-        handleData("http://192.168.0.120:5000/api/v1/links", showLinks, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/links`, showLinks, null, "GET", null, token);
     };
 };
 //#endregion
@@ -125,7 +125,7 @@ const listenLinkButtons = function() {
                 const token = sessionStorage.getItem("token");
     
                 if(token) {
-                    handleData(`http://192.168.0.120:5000/api/v1/links`, showLinkAddMessage, showLinkAddError, "PUT", JSON.stringify(data), token);
+                    handleData(`http://${window.location.hostname}:5000/api/v1/links`, showLinkAddMessage, showLinkAddError, "PUT", JSON.stringify(data), token);
                 };
             });
 
@@ -159,7 +159,7 @@ const listenLinkButtons = function() {
                     const token = sessionStorage.getItem("token");
     
                     if(token) {
-                        handleData(`http://192.168.0.120:5000/api/v1/links/${this.dataset.id}`, showLinkRemoveMessage, null, "DELETE", null, token);
+                        handleData(`http://${window.location.hostname}:5000/api/v1/links/${this.dataset.id}`, showLinkRemoveMessage, null, "DELETE", null, token);
                     };
                 });
 

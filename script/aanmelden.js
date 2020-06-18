@@ -65,7 +65,7 @@ const login = function() {
             password: password
         });
 
-        handleData("http://192.168.0.120:5000/api/v1/aanmelden", showAangemeld, showError, "POST", body);
+        handleData(`http://${window.location.hostname}:5000/api/v1/aanmelden`, showAangemeld, showError, "POST", body);
 };
 //#endregion
 

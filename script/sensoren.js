@@ -91,7 +91,7 @@ const getValuesTemperatuur = function(date) {
     const token = sessionStorage.getItem("token");
 
     if(token) {
-        handleData(`http://192.168.0.120:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/sensoren/3/${date}`, showChart, null, "GET", null, token);
         if(doOnce) {
             listenToChartDateChange();
             listenToChartResizeScreen();
@@ -110,7 +110,7 @@ const getValuesLuchtkwaliteit = function(date) {
     const token = sessionStorage.getItem("token");
 
     if(token) {
-        handleData(`http://192.168.0.120:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/sensoren/2/${date}`, showChart, null, "GET", null, token);
         if(doOnce) {
             listenToChartDateChange();
             listenToChartResizeScreen();

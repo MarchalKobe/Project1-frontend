@@ -45,7 +45,7 @@ const getNickname = function() {
     const token = sessionStorage.getItem("token");
 
     if(token) {
-        handleData("http://192.168.0.120:5000/api/v1/nickname", showNickname, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/nickname`, showNickname, null, "GET", null, token);
     };
 };
 
@@ -53,7 +53,7 @@ const getAnswer = function() {
     const token = sessionStorage.getItem("token");
 
     if(token) {
-        handleData(`http://192.168.0.120:5000/api/v1/message/answer/${messageID}`, showAnswer, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/message/answer/${messageID}`, showAnswer, null, "GET", null, token);
     };
 };
 //#endregion
@@ -78,7 +78,7 @@ const listenToSendButton = function() {
         const token = sessionStorage.getItem("token");
 
         if(token) {
-            handleData("http://192.168.0.120:5000/api/v1/sendmessage", showSendMessage, showSendError, "POST", JSON.stringify(data), token);
+            handleData(`http://${window.location.hostname}:5000/api/v1/sendmessage`, showSendMessage, showSendError, "POST", JSON.stringify(data), token);
         };
     });
 };

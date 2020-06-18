@@ -234,7 +234,7 @@ const showSafeButtonMessage = function(jsonObject) {
     const token = sessionStorage.getItem("token");
 
     if(jsonObject.date && token) {
-        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${jsonObject.date}`, showEvents, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/activiteiten/${jsonObject.date}`, showEvents, null, "GET", null, token);
     };
 };
 
@@ -277,7 +277,7 @@ const getCalendarEvents = function() {
     const token = sessionStorage.getItem("token");
     
     if(token) {
-        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${date}/days`, showCalendarEvents, null, "GET", null, token);
+        handleData(`http://${window.location.hostname}:5000/api/v1/activiteiten/${date}/days`, showCalendarEvents, null, "GET", null, token);
     };
 };
 //#endregion
@@ -346,7 +346,7 @@ const listenToEventButtons = function() {
             const token = sessionStorage.getItem("token");
 
             if(token) {
-                handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.date}`, showEvents, null, "GET", null, token);
+                handleData(`http://${window.location.hostname}:5000/api/v1/activiteiten/${this.dataset.date}`, showEvents, null, "GET", null, token);
             };
         });
     };
@@ -380,7 +380,7 @@ const listenToEditButtonClick = function() {
                     const token = sessionStorage.getItem("token");
 
                     if(token) {
-                        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.id}`, showDeleteButtonMessage, null, "DELETE", null, token);
+                        handleData(`http://${window.location.hostname}:5000/api/v1/activiteiten/${this.dataset.id}`, showDeleteButtonMessage, null, "DELETE", null, token);
                     };
                 });
 
@@ -393,7 +393,7 @@ const listenToEditButtonClick = function() {
                     const token = sessionStorage.getItem("token");
 
                     if(token) {
-                        handleData(`http://192.168.0.120:5000/api/v1/activiteiten/${this.dataset.id}`, showSafeButtonMessage, showSafeButtonError, "PUT", JSON.stringify(info), token);
+                        handleData(`http://${window.location.hostname}:5000/api/v1/activiteiten/${this.dataset.id}`, showSafeButtonMessage, showSafeButtonError, "PUT", JSON.stringify(info), token);
                     };
                 });
             } else {

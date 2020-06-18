@@ -44,7 +44,7 @@ const listenToAddEventButton = function() {
         const token = sessionStorage.getItem("token");
 
         if(token) {
-            handleData("http://192.168.0.120:5000/api/v1/activiteiten", showAddEventMessage, showAddEventError, "PUT", JSON.stringify(data), token);
+            handleData(`http://${window.location.hostname}:5000/api/v1/activiteiten`, showAddEventMessage, showAddEventError, "PUT", JSON.stringify(data), token);
         }
     });
 };
